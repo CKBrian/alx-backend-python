@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-from typing import List
 """
    Defines a module that implements a function  sum_list that takes a
    list[float] input_list as argument and returns the string
    representation of the list[float]
 """
+from typing import List
 
 
 def sum_list(input_list: List[float]) -> float:
