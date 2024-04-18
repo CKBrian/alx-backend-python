@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 '''Defines a module with an annotated function and values'''
-
 from typing import Iterable, List, Sequence, Tuple
 
 
