@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-from typing import Callable
 """
    Defines a module that implements a function make_multiplier that takes a
    list[float | int] multiplier as argument and returns the string
    representation of the list[float]
 """
+from typing import Callable
 
 
 def make_multiplier(multiplier: float) -> Callable[[float], float]:
