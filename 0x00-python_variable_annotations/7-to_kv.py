@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-from typing import Tuple, Union
 """
    Defines a module that implements a function  to_kv that takes a
    list[float] input_list as argument and returns the string
    representation of the list[float]
 """
+from typing import Tuple, Union
 
 
 def to_kv(k: str, v: Union[int, float], ) -> Tuple[str, float]:
