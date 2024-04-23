@@ -14,4 +14,3 @@ async def measure_runtime() -> float:
     stop = time.time()
     elapsed = stop - start
     return elapsed
-
