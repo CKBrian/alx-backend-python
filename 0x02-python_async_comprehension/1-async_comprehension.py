@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+'''Defines a module that uses async omprehension'''
 
 import asyncio
 from typing import List
