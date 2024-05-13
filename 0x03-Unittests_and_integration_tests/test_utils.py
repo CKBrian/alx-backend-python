@@ -12,7 +12,7 @@ class TestAccessNestedMap(unittest.TestCase):
     '''Defines a TestAccessNestedMap unit testing class'''
     @parameterized.expand([
             ({"a": 1}, ("a",), 1),
-            ({"a": {"b": 2}}, ("a",), 2),
+            ({"a": {"b": 2}}, ("a",), {'b': 2}),
             ({"a": {"b": 2}}, ("a", "b"), 2)
     ])
 
