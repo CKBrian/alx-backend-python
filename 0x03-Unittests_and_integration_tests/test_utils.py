@@ -1,4 +1,4 @@
-#!/usr/bin/env/ python3
+#!/usr/bin/env python3
 '''
        Defines a test_utils module with a TestAccessNestedMap class
 '''
@@ -17,6 +17,7 @@ from typing import (
 
 class TestAccessNestedMap(unittest.TestCase):
     '''Defines a TestAccessNestedMap unit testing class'''
+
     @parameterized.expand([
             ({"a": 1}, ("a",), 1),
             ({"a": {"b": 2}}, ("a",), {'b': 2}),
