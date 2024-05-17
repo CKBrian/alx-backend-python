@@ -74,22 +74,25 @@ class TestGithubOrgClient(unittest.TestCase):
                     'name': 'truth',
                     'description': 'Fluent assertions for Java and Android',
                     'language': 'Java',
-                    'stargazers_count': 2700
+                    'stargazers_count': 2700,
+                    "html_url": "https://github.com/google/truth",
+                    "description": "Fluent assertions for Java and Android",
+                    "fork": False,
+                    "url": "https://api.github.com/repos/google/truth"
                 },
             ]
             MockGet.return_value = payload
 
             # Mock returned output
             public_repos = [
-                repo["name"] for repo in payload
-                if license is None
-            ]
-            public_repos = ["truth"]
+                    "truth",
+                ]
+            # public_repos = ["truth"]
 
             # Get function output
             org = 'google'
             client = GithubOrgClient(org)
-            res = client.public_repos(None)
+            res = client.public_repos()
             print(res)
 
             # Assertions
