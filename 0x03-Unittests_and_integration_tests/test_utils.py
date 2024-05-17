@@ -5,7 +5,7 @@
 
 import unittest
 from unittest.mock import patch, Mock
-from parameterized import parameterized
+from parameterized import parameterized # type: ignore
 from utils import access_nested_map, get_json, memoize
 from typing import (
     Mapping,
