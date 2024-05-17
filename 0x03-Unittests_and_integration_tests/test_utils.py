@@ -78,7 +78,7 @@ class TestMemoize(unittest.TestCase):
         def a_property(self):
             return self.a_method()
 
-    def test_memoize(self):
+    def test_memoize(self) -> None:
         '''Tests memoization of a function output in cache'''
         with patch.object(self.TestClass, 'a_method') as MockMemoize:
             # Mock the return value of get_json
