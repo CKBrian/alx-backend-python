@@ -2,7 +2,7 @@
 '''Defines a module that tests client.GithubOrgClient class'''
 import unittest
 from parameterized import parameterized
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch, MagicMock, PropertyMock
 from client import (
     GithubOrgClient,
     get_json,
@@ -40,6 +40,24 @@ class TestGithubOrgClient(unittest.TestCase):
         # Assertions
         self.assertEqual(res, data)
         MockGet.assert_called_once_with(ORG_URL.format(org=org))
+
+    def test_public_repos_url(self) -> None:
+        '''Test that GithubOrgClient.test_public_repos_url
+           returns the correct value based on mocked payload'''
+        # specifing new_callable for functions with @property
+        with patch.object(GithubOrgClient, 'org',
+                          new_callable=PropertyMock) as MockOrg:
+            # Mock return value
+            repos_url = 'https://api.github.com/orgs/google/repos'
+            url_dict = {'repos_url': repos_url}
+            MockOrg.return_value = url_dict
+            # Get function output
+            org = 'google'
+            client = GithubOrgClient(org)
+            res = client._public_repos_url
+            # Assertions
+            self.assertEqual(res, repos_url)
+            MockOrg.assert_called_once()
 
 
 if __name__ == "__main__":
