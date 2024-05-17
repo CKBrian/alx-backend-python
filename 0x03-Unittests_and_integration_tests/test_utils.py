@@ -6,7 +6,7 @@
 import unittest
 from unittest.mock import patch, Mock
 from parameterized import parameterized
-from utils import access_nested_map, get_json
+from utils import access_nested_map, get_json, memoize
 from typing import (
     Mapping,
     Sequence,
@@ -66,6 +66,32 @@ class TestGetJson(unittest.TestCase):
             # Test that the mocked get method was called exactly
             # once (per input) with test_url as argument.
             MockGet.assert_called_once_with(test_url)
+
+
+class TestMemoize(unittest.TestCase):
+    class TestClass:
+
+        def a_method(self):
+            return 42
+
+        @memoize
+        def a_property(self):
+            return self.a_method()
+
+    def test_memoize(self):
+        '''Tests memoization of a function output in cache'''
+        with patch.object(self.TestClass, 'a_method') as MockMemoize:
+            # Mock the return value of get_json
+            MockMemoize.return_value = 42
+
+            # Call the function under test
+            obj = self.TestClass()
+            obj.a_property
+            res = obj.a_property
+
+            # Assertions
+            self.assertEqual(res, 42)
+            MockMemoize.assert_called_once()
 
 
 if __name__ == '__main__':
