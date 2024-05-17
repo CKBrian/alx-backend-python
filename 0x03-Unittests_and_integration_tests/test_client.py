@@ -59,6 +59,44 @@ class TestGithubOrgClient(unittest.TestCase):
             self.assertEqual(res, repos_url)
             MockOrg.assert_called_once()
 
+    @patch('client.get_json')
+    def test_public_repos(self, MockGet: MagicMock) -> None:
+        '''Test that GithubOrgClient.public_repos returns the list of repos
+           as expected from the chosen payload.'''
+        with patch.object(GithubOrgClient, '_public_repos_url',
+                          new_callable=PropertyMock) as MockRepoUrl:
+            # Mock return value
+            repos_url = 'https://api.github.com/orgs/google/repos'
+            MockRepoUrl.return_value = repos_url
+            payload = [
+                {
+                    'id': 1936771,
+                    'name': 'truth',
+                    'description': 'Fluent assertions for Java and Android',
+                    'language': 'Java',
+                    'stargazers_count': 2700
+                },
+            ]
+            MockGet.return_value = payload
+
+            # Mock returned output
+            public_repos = [
+                repo["name"] for repo in payload
+                if license is None
+            ]
+            public_repos = ["truth"]
+
+            # Get function output
+            org = 'google'
+            client = GithubOrgClient(org)
+            res = client.public_repos(None)
+            print(res)
+
+            # Assertions
+            self.assertEqual(res, public_repos)
+            MockRepoUrl.assert_called_once()
+            MockGet.assert_called_once_with(repos_url)
+
 
 if __name__ == "__main__":
     unittest.main()
